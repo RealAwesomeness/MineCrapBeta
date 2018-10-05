@@ -11,7 +11,7 @@ def getJsonFromTradeOgre():
 		with aiohttp.request('GET', url) as result:
 			if result.status == 200:
 				temp = None
-				temp = await result.json()
+				temp = result.json()
 
 				#required for json as a list of dict
 				response = json.dumps(temp)
@@ -25,7 +25,7 @@ def getJsonFromStocksExchange():
 	try:
 		with aiohttp.get(url) as result:
 			if result.status == 200:
-				response = await result.json()
+				response = result.json()
 	except:
 		response = None
 	return response
@@ -36,7 +36,7 @@ def getJsonFromCryptoBridge():
 	try:
 		with aiohttp.get(url) as result:
 			if result.status == 200:
-				response = await result.json()
+				response = result.json()
 	except:
 		response = None
 	return response
@@ -48,7 +48,7 @@ def getJsonFromCoinGecko():
 		with aiohttp.request('GET', url) as result:
 			if result.status == 200:
 				temp = None
-				temp = await result.json()
+				temp = result.json()
 
 				#required for json as a list of dict
 				response = json.dumps(temp)
@@ -62,7 +62,7 @@ def getJsonFromSouthXchange(coin):
 	try:
 		with aiohttp.get(url) as result:
 			if result.status == 200:
-				response = await result.json()
+				response = result.json()
 	except:
 		return	None
 	return response
@@ -73,7 +73,7 @@ def getJsonFromCryptopia(coin):
 	try:
 		with aiohttp.get(url) as result:
 			if result.status == 200:
-				response = await result.json()
+				response = result.json()
 	except:
 		return	None
 	return response
@@ -84,7 +84,7 @@ def getJsonFromGraviex(coin):
 	try:
 		with aiohttp.get(url) as result:
 			if result.status == 200:
-				response = await result.json()
+				response = result.json()
 	except:
 		return	None
 	return response
@@ -95,7 +95,7 @@ def getJsonFromCrex(coin):
 	try:
 		with aiohttp.get(url) as result:
 			if result.status == 200:
-				response = await result.json()
+				response = result.json()
 	except:
 		return	None
 	return response
@@ -103,7 +103,7 @@ exchanges=[]
 def to(coin):
 	"""to(coin) to get info on coin from TradeOgre"""
 	exchanges.append(to)
-	jsonResult = await getJsonFromTradeOgre()
+	jsonResult = getJsonFromTradeOgre()
 	if jsonResult != None:
 		found = False
 		coin = 'BTC-' + coin.upper()
@@ -129,7 +129,7 @@ def to(coin):
 def cb(coin):
 	"""cb(coin) to get info on coin from Crypto-Bridge"""
 	exchanges.append(cb)
-	jsonResult = await getJsonFromCryptoBridge()
+	jsonResult = getJsonFromCryptoBridge()
 	if jsonResult != None:
 		found = False
 		coin = coin + "_BTC"
@@ -151,7 +151,7 @@ def cb(coin):
 def se(coin):
 	"""se(coin) to get info on coin from Stocks.Exchange"""
 	exchanges.append(se)
-	jsonResult = await getJsonFromStocksExchange()
+	jsonResult = getJsonFromStocksExchange()
 	if jsonResult != None:
 		found = False
 		coin = coin + '_BTC'
@@ -175,7 +175,7 @@ def se(coin):
 def sx(coin):
 	"""sx(coin) to get info on coin from SouthXchange"""
 	exchanges.append(sx)
-	jsonResult = await getJsonFromSouthXchange(coin)
+	jsonResult = getJsonFromSouthXchange(coin)
 	if len(jsonResult) == 0 or jsonResult == None:
 		await self.bot.say('```Sorry, your coin was not found on SouthXchange.```')
 		return
@@ -192,7 +192,7 @@ def sx(coin):
 def ct(coin):
 	"""ct(coin) to get info on coin from Cryptopia"""
 	exchanges.append(ct)
-	jsonResult = await getJsonFromCryptopia(coin)
+	jsonResult = getJsonFromCryptopia(coin)
 	if jsonResult != None:
 		if jsonResult['Data'] == None:
 			messageResponse = '```Sorry, your coin was not found on Cryptopia.```'
@@ -212,7 +212,7 @@ def ct(coin):
 def gv(coin):
 	"""gv(coin) to get info on coin from Graviex"""
 	exchanges.append(gv)
-	jsonResult = await getJsonFromGraviex(coin)
+	jsonResult = getJsonFromGraviex(coin)
 	if jsonResult != None:
 		try:
 			messageResponse = '```'
@@ -234,7 +234,7 @@ def cx(coin):
 	"""cx(coin) to get info on coin from Crex24"""
 	exchanges.append(cx)
 	# Coin must be passed in uppercase, otherwise API will not find it
-	jsonResult = await getJsonFromCrex(coin.upper())
+	jsonResult = getJsonFromCrex(coin.upper())
 	if jsonResult != None:
 		print('json string: ' + str(jsonResult))
 		try:

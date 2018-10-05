@@ -167,26 +167,22 @@ def se(coin):
 				found=True
 				break
 		if found==False:
-			messageResponse["found"] = True
-	elif jsonResult == None:
-		messageResponse = '```Could not connect to Stocks.Exchange.  Wait and try again.```'
+			messageResponse["found"] = False
 		
 	
 def sx(coin):
 	"""sx(coin) to get info on coin from SouthXchange"""
 	exchanges.append(sx)
 	jsonResult = getJsonFromSouthXchange(coin)
+	messageResponse={}
 	if len(jsonResult) == 0 or jsonResult == None:
-		await self.bot.say('```Sorry, your coin was not found on SouthXchange.```')
+		messageResponse["found"] = False
 		return
-	messageResponse = '```'
-	messageResponse += 'Data provided by SouthXchange | https://www.southxchange.com \n'
-	messageResponse += '{0}_BTC pairing from SouthXchange'.format(coin.upper()) + '\n'
-	messageResponse += '{0:20}:\t{1:.8f}\n'.format('Last Value', jsonResult['Last'])
-	messageResponse += '{0:20}:\t{1:.8f}\n'.format('Buying Value', jsonResult['Bid'])
-	messageResponse += '{0:20}:\t{1:.8f}\n'.format('Selling Value', jsonResult['Ask'])
-	messageResponse += '{0:20}:\t{1:.2f}%'.format('24hr Variation', jsonResult['Variation24Hr'])
-	messageResponse += '```'
+	messageResponse["last"] = jsonResult['Last']
+	messageResponse["buy"] = jsonResult['Bid']
+	messageResponse["sell"] = jsonResult['Ask']
+	messageResponse["24variance"] = jsonResult['Variation24Hr']
+	messageResponse["found"] = True
 		
 	
 def ct(coin):

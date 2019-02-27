@@ -5,6 +5,7 @@ import os
 import sys
 import time
 from pathlib import Path
+import utils
 def main():
     appdatafile = open("appdata.txt", "rw+")
     minersfile = open("miners.txt", "r")
@@ -34,22 +35,12 @@ def main():
 	if sys.platform.startswith("win"):
 		
 	else:
-		startminer(miner, miners[miner]["start"], best, config) #passes the miner, start line syntax, the algo to use (will be able to use coin soon™), and the config
+		utils.startminer(miner, miners[miner]["start"], best, config) #passes the miner, start line syntax, the algo to use (will be able to use coin soon™), and the config
 		while True:
 			tmp = os.popen("ps -Af").read()
 			if appdata["benchmark-data"]["miner"] not in tmp[:]:
 				print("Miner crashed! Restarting...")
-				startminer(miner, miners[miner]["start"], best, config)
+				utils.startminer(miner, miners[miner]["start"], best, config)
 			else:
 				print(getStats(miner))
 			time.sleep(5)
-def startminer(miner, start, algo, config) :
-	start = start.replace("ALGO", algo)
-	start = start.replace("ADDRESS", config[algo]["address"])
-	start = start.replace("POOL", config[algo]["pool"])
-	start = start.replace("PORT", config[algo]["port"]
-	if sys.platform.startswith("win"):
-		start = miner + "\\" + miner + ".exe" + start
-	else:
-		start = "./" + miner + "/" + miner + start
-	os.system(start)

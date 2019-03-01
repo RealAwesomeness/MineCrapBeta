@@ -14,8 +14,7 @@ def main():
         print("Loading config...")
         configfile = open("config.txt", "r")
     except:
-        print("FATAL ERROR : Unable to open config! Try to create a config based on the example which is named config_example.txt.")
-        quit
+        utils.createconfig()
     config = json.loads(configfile.read())
     miners = json.loads(minersfile.read())
     if appdatafile.read() == "" or "--benchmark" in sys.argv: #check for first run or requested rebenchmark

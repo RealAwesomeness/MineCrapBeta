@@ -12,20 +12,19 @@ System Requirements
 Installation Instructions
 
 - If you haven&#39;t already, install drivers and/or CUDA for your GPUS
-- Download binaries for your OS from [here](http://github.com/RealAwesomeness/MineCrap/releases)
-- Extract the binaries and run the MineCrap executable
+- Download the latest release [here](http://github.com/RealAwesomeness/MineCrapBeta/releases)
+- Extract and run MineCrapBeta.py
 
 Usage
 
-- Run the MineCrap executable
-- Enter information when prompted
-- Press start
+- Run MineCrapBeta.py
+- Enter information when prompted and wait for benchmarking to finish
 
 Troubleshooting
 
 - Make sure you have followed all the installation instructions and have met the system requirements.
 - Reinstall everything - including your drivers
-- If all else fails, submit an issue [here](http://github.com/RealAwesomeness/MineCrap/issues)
+- If all else fails, submit an issue [here](http://github.com/RealAwesomeness/MineCrapBeta/issues)
 
 Credits
 

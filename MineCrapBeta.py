@@ -14,7 +14,7 @@ def main():
         print("Loading config...")
         configfile = open("config.txt", "r")
     except:
-        print("FATAL ERROR : Unable to open config! Try to create a config based on the example which is named ccnfig_example.txt.")
+        print("FATAL ERROR : Unable to open config! Try to create a config based on the example which is named config_example.txt.")
         quit
     config = json.loads(configfile.read())
     miners = json.loads(minersfile.read())

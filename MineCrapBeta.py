@@ -8,11 +8,11 @@ from pathlib import Path
 import utils
 import subprocess
 def main():
-    appdatafile = open("appdata.txt", "rw+")
-    minersfile = open("miners.txt", "r")
+    appdatafile = open("appdata.json", "rw+")
+    minersfile = open("miners.json", "r")
     try:
         print("Loading config...")
-        configfile = open("config.txt", "r")
+        configfile = open("config.json", "r")
     except:
         utils.createconfig()
     config = json.loads(configfile.read())

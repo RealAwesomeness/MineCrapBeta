@@ -1,6 +1,7 @@
 import sys
 import os
-def startminer(miner, start, algo, config) :
+import json
+def startminer(miner, start, algo, config):
 	start = start.replace("ALGO", algo)
 	start = start.replace("ADDRESS", config["addresses"]["bitcoin"])
 	found = False
@@ -21,3 +22,9 @@ def startminer(miner, start, algo, config) :
 	else:
 		start = "./" + miner + "/" + miner + start
 	os.system(start)
+def createconfig():
+	configfile = open("config.json", "w+")
+	configexample = open("config_example.json", "r")
+	config = json.load(configexample.read())
+	for address in addresses:
+		addresses[address] = input("What is your " + str(address) + " address? ")

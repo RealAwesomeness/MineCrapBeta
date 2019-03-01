@@ -1,5 +1,5 @@
 # MineCrapBeta
-Multi OS profit switching mining - **CURRENTLY ONLY SUPPORTING AUTOEXCHANGES POOLS**
+Multi OS profit switching mining - **CURRENTLY ONLY SUPPORTING AUTOEXCHANGE POOLS**
 
 MineCrap Manual
 

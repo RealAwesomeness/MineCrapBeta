@@ -1,0 +1,16 @@
+{  
+   "addresses":{  
+      "bitcoin":"YOUR ADDRESS"
+   },
+   "pools":{  
+      "dankepool.org":{  
+         "algorithms":{  
+            "x16r":{  
+               "port":"3636",
+               "subdomain":""
+            }
+         },
+         "url":"dankepool.org"
+      }
+   }
+}

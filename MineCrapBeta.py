@@ -33,12 +33,12 @@ def main():
 	configfile.close()
 	miner = appdata["benchmark-data"][best]["miner"]
 	if sys.platform.startswith("win"):
-		utils.startminer(miner, miners[miner]["start"]
+		utils.startminer(miner, miners["miners"][miner]["start"]
 		while True:
 			s = subprocess.check_output('tasklist', shell=True)
-			if appdata["benchmark-data"]["miner"] not in s:
+			if appdata["benchmark-data"][best]["miner"] not in s:
 				print("Miner crashed! Restarting...")
-				utils.startminer(miner, miners[miner]["start"], best, config)
+				utils.startminer(miner, miners["miners"][miner]["start"], best, config)
 			else:
 				print(getStats(miner))
 			time.sleep(5)
@@ -46,9 +46,9 @@ def main():
 		utils.startminer(miner, miners[miner]["start"], best, config) #passes the miner, start line syntax, the algo to use (will be able to use coin soon™), and the config
 		while True:
 			tmp = os.popen("ps -Af").read()
-			if appdata["benchmark-data"]["miner"] not in tmp:
+			if appdata["benchmark-data"][best]["miner"] not in tmp:
 				print("Miner crashed! Restarting...")
-				utils.startminer(miner, miners[miner]["start"], best, config)
+				utils.startminer(miner, miners["miners"][miner]["start"], best, config)
 			else:
 				print(getStats(miner))
 			time.sleep(5)

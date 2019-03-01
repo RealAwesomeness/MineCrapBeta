@@ -6,6 +6,7 @@ import sys
 import time
 from pathlib import Path
 import utils
+import subprocess
 def main():
     appdatafile = open("appdata.txt", "rw+")
     minersfile = open("miners.txt", "r")
@@ -33,12 +34,20 @@ def main():
 	configfile.close()
 	miner = appdata["benchmark-data"][best]["miner"]
 	if sys.platform.startswith("win"):
-		
+		utils.startminer(miner, miners[miner]["start"]
+		while True:
+			s = subprocess.check_output('tasklist', shell=True)
+			if appdata["benchmark-data"]["miner"] not in s:
+				print("Miner crashed! Restarting...")
+				utils.startminer(miner, miners[miner]["start"], best, config)
+			else:
+				print(getStats(miner))
+			time.sleep(5)
 	else:
 		utils.startminer(miner, miners[miner]["start"], best, config) #passes the miner, start line syntax, the algo to use (will be able to use coin soon™), and the config
 		while True:
 			tmp = os.popen("ps -Af").read()
-			if appdata["benchmark-data"]["miner"] not in tmp[:]:
+			if appdata["benchmark-data"]["miner"] not in tmp:
 				print("Miner crashed! Restarting...")
 				utils.startminer(miner, miners[miner]["start"], best, config)
 			else:

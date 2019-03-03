@@ -19,7 +19,7 @@
    "miners":{  
       "ethminer":{  
          "start":" -G --api-bind 6969 --pool stratum://ADDRESS.WORKER@SUBDOMAINPOOL:PORT",
-		 "api" = true
+		 "api" : true
       },
       "lolminer":{  
          "start":" --coin zel --pool SUBDOMAINPOOL --port PORT --user ADDRESS --pass x",

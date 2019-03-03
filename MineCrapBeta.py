@@ -41,24 +41,26 @@ def main():
 	appdatafile.close()
 	minersfile.close()
 	configfile.close()
-	miner = appdata["benchmark-data"][best][0]
+	miner = appdata["benchmark-data"][bestalgo][0]
 	if sys.platform.startswith("win"):
-		utils.startminer(miner, miners["miners"][miner]["start"])
+		utils.startminer(miner, miners["miners"][miner]["start"], bestalgo, config)
 		while True:
 			s = subprocess.check_output('tasklist', shell=True)
 			if appdata["benchmark-data"][best]["miner"] not in s:
 				print("Miner crashed! Restarting...")
-				utils.startminer(miner, miners["miners"][miner]["start"], best, config)
+				utils.startminer(miner, miners["miners"][miner]["start"], bestalgo, config)
 			else:
-				print(getStats(miner))
+				hashrate = utils.apiHashrate(miner)
+				print("Mining " + bestalgo + " at " + str(hashrate[0]) + hashrate[1] + "/s")
 			time.sleep(5)
 	else:
-		utils.startminer(miner, miners[miner]["start"], best, config) #passes the miner, start line syntax, the algo to use (will be able to use coin soon™), and the config
+		utils.startminer(miner, miners[miner]["start"], bestalgo, config) #passes the miner, start line syntax, the algo to use (will be able to use coin soon™), and the config
 		while True:
 			tmp = os.popen("ps -Af").read()
 			if appdata["benchmark-data"][best]["miner"] not in tmp:
 				print("Miner crashed! Restarting...")
-				utils.startminer(miner, miners["miners"][miner]["start"], best, config)
+				utils.startminer(miner, miners["miners"][miner]["start"], bestalgo, config)
 			else:
-				print(getStats(miner))
+				hashrate = utils.apiHashrate(miner)
+				print("Mining " + bestalgo + " at " + str(hashrate[0]) + hashrate[1] + "/s")
 			time.sleep(5)

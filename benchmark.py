@@ -14,15 +14,19 @@ def benchmark(algo):
 	miners = json.load(minersfile.read())
 	for algo in miners["supported-algos"]:
 		best = ["", 0]
-		for miner in miners["supported-algos"][algo]
-			utils.startminer(miner, miners["miners"][miner]["start"], algo, config)
-			time.sleep(300)
-			hashrate = utils.apiHashrate(miner)
-			if hashrate > best[1]:
-				best[1] = hashrate
-				best[0] = miner
-			if sys.platform.startswith("win"):
-				os.system("Taskkill /IM " + miner + ".exe /F")
+		for miner in miners["supported-algos"][algo]:
+			if miners["miners"][miner]["api"]:
+				utils.startminer(miner, miners["miners"][miner]["start"], algo, config)
+				time.sleep(300)
+				hashrate = utils.apiHashrate(miner)[0]
+				if hashrate > best[1]:
+					best[1] = hashrate
+					best[0] = miner
+				if sys.platform.startswith("win"):
+					os.system("Taskkill /IM " + miner + ".exe /F")
+				else:
+					os.system("pkill " + miner)
 			else:
-				os.system("pkill " + miner)
+				if algo in miners["miners"][miner]["best"]:
+					best = [miner, 99999999]
 		appdata["benchmark-data"][algo] = best

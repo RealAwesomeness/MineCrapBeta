@@ -59,13 +59,13 @@ def nompalgos(url, config):
 	config["pools"][newpool]["algorithms"][algo]["port"] = status["config"]["ports"][0]["port"]
 def apiHashrate(miner): #returns hashrate for eth in mh and all others in kh
 	if miner=="ccminer":
-		return ccminerapi("summary")
+		return [ccminerapi("summary"), "kh"]
 	if miner=="ethminer";
-		return int(json.loads(requests.post("127.0.0.1:6969", data = {
+		return [int(json.loads(requests.post("127.0.0.1:6969", data = {
   "id": 1,
   "jsonrpc": "2.0",
   "method": "miner_getstat1"
-}))["result"][2].split";"[0])/10
+}))["result"][2].split";"[0])/10, "mh"]
 def ccminerapi(command):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_address = ("127.0.0.1", 6969)

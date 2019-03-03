@@ -31,7 +31,7 @@ def main():
 	for algo in miners["supported-algos"]:
 		supportedalgos.append(algo)
     print("Getting the best profit miner...")
-    best = requests.post("minecrap.dankepool.org", data = json.dumps({appdata["benchmark-data"]}))
+    best = requests.post("minecrap.dankepool.org:8080", data = json.dumps({appdata["benchmark-data"]}))
 	bestalgo = ""
 	found = False
 	for algo in best:

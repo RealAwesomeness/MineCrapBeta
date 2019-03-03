@@ -1,0 +1,34 @@
+{  
+   "supported-algos":{  
+      "ethash":[  
+         "ethminer"
+      ],
+      "144_5":[  
+         "lolminer"
+      ],
+      "x22i":[  
+         "ccminer"
+      ],
+      "x16r":[  
+         "ccminer"
+      ],
+      "lyra2re3":[  
+         "ccminer"
+      ]
+   },
+   "miners":{  
+      "ethminer":{  
+         "start":" -G --api-bind 6969 --pool stratum://ADDRESS.WORKER@SUBDOMAINPOOL:PORT",
+		 "api" = true
+      },
+      "lolminer":{  
+         "start":" --coin zel --pool SUBDOMAINPOOL --port PORT --user ADDRESS --pass x",
+		 "api" : false,
+		 "best" : ["144_5"]
+      },
+      "ccminer":{  
+         "start":" -a ALGO -b 0.0.0.0:6969 –o SUBDOMAINPOOL:PORT –u ADDRESS -p x",
+		 "api" : true
+      }
+   }
+}

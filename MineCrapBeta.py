@@ -41,7 +41,7 @@ def main():
 	appdatafile.close()
 	minersfile.close()
 	configfile.close()
-	miner = appdata["benchmark-data"][best]["miner"]
+	miner = appdata["benchmark-data"][best][0]
 	if sys.platform.startswith("win"):
 		utils.startminer(miner, miners["miners"][miner]["start"])
 		while True:

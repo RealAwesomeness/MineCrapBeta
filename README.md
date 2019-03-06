@@ -8,6 +8,7 @@ System Requirements
 - For NVIDIA GPUS : CUDA 8 or higher
 - For AMD GPUS : Adrealanin drivers v18.9.3 or higher
 - Windows 7 or higher **OR** Ubuntu 14.04 or higher
+- Make, pipenv, and Python 3.7 or higher
 
 Installation Instructions
 
@@ -17,6 +18,7 @@ Installation Instructions
 
 Usage
 
+- Enter make setup into a terminal or commandline to install dependencies
 - Run MineCrapBeta.py
 - Enter information when prompted and wait for benchmarking to finish
 

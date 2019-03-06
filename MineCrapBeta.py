@@ -9,24 +9,29 @@ import utils
 import subprocess
 import requests
 def main():
-    appdatafile = open("appdata.json", "rw+")
-    minersfile = open("miners.json", "rw+")
+    appdatafilewrite = open("appdata.json", "w+")
+    appdatafileread = open("appdata.json", "r")
+    minersfile = open("miners.json", "r")
+    if "--create-config" in sys.argv:
+        utils.createconfig()
+    print("Loading config...")
+    configfile = open("config.json", "r")
     try:
-        print("Loading config...")
-        configfile = open("config.json", "r")
+        config = configfile.read()
     except:
         utils.createconfig()
-    config = json.loads(configfile.read())
+    configfile = open("config.json", "r")
+    config = configfile.read()
     miners = json.loads(minersfile.read())
-    if appdatafile.read() == "" or "--benchmark" in sys.argv: #check for first run or requested rebenchmark
+    appdata = json.loads(appdatafileread.read())
+    if not appdatafileread or "--benchmark" in sys.argv: #check for first run or requested rebenchmark
         appdata = {}
         print("Benchmarking algos...")
         for algo in miners["supported-algos"]:
             result = benchmark.benchmark(algo) #benchmark an algo if it is supported
             appdata["benchmark-data"]["hashrate"][algo] = result["hashrate"]
             appdata["benchmark-data"]["power"][algo] = result["power"]
-        appdatafile.write(json.dumps(appdata))
-    appdata = json.loads(appdatafile.read())
+        appdatafilewrite.write(json.dumps(appdata))
     supportedalgos = []
     for algo in miners["supported-algos"]:
         supportedalgos.append(algo)
@@ -38,10 +43,16 @@ def main():
         if algo in supportalgos and not found:
             bestalgo = algo
             found = True
-    appdatafile.close()
+    appdatafileread.close()
+    appdatafilewrite.close()
     minersfile.close()
     configfile.close()
     miner = appdata["benchmark-data"][bestalgo][0]
+    #What you see below this is really stupid. I'll fix this in future updates but for now it's here so ethereum mining will work right.
+    if miner == "ethminer":
+        address = config["addresses"]["ethereum"]
+    else:
+        address = config["addresses"]["ethereum"]
     if sys.platform.startswith("win"):
         utils.startminer(miner, miners["miners"][miner]["start"], bestalgo, config)
         while True:
@@ -64,3 +75,4 @@ def main():
                 hashrate = utils.apiHashrate(miner)
                 print("Mining " + bestalgo + " at " + str(hashrate[0]) + hashrate[1] + "/s")
             time.sleep(5)
+main()

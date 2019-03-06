@@ -6,10 +6,12 @@ import sys
 def benchmark(algo):
     minersfile = open("miners.txt", "r")
     configfile = open("config_example.json", "r")
-    appdatafile = open("appdata.json", "rw+")
-    appdata = appdatafile.read()
+    appdatafile = open("appdata.json", "r+")
+    appdata = json.loads(appdatafile.read())
     if not appdata:
         appdata = {}
+    appdatafile.close()
+    appdatafile = open("appdata.json", "w")
     config = json.load(configfile.read())
     miners = json.load(minersfile.read())
     for algo in miners["supported-algos"]:
@@ -30,3 +32,4 @@ def benchmark(algo):
                 if algo in miners["miners"][miner]["best"]:
                     best = [miner, 99999999]
         appdata["benchmark-data"][algo] = best
+    appdatafile.write(json.dumps(appdata))

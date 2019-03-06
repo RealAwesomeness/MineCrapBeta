@@ -1,6 +1,7 @@
 {  
    "addresses":{  
-      "bitcoin":"YOUR ADDRESS"
+      "bitcoin":"3DkpM7Fxvfz2dWy1ntHfCDKguCPGKpH2GG",
+      "ethereum":"0x07d66da8d57573419b81d5445094d8f8249f01af"
    },
    "pools":{  
       "dankepool.org":{  

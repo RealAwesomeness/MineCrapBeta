@@ -60,7 +60,7 @@ def yiimpalgos(url, config):
     print(status)
     status = json.loads(status.read())
     for algo in status:
-        config["pools"][newpool]["algorithms"][algo]["port"] = status[algo]["port"]
+        config["pools"][url]["algorithms"][algo]["port"] = status[algo]["port"]
     return config
 def nompalgos(url, config):
     port = input("What port is the api located on?")
@@ -70,7 +70,7 @@ def nompalgos(url, config):
     except:
         status = urlopen("https://" + url + ":" + port + "/stats")
     status = json.loads(status.read())
-    config["pools"][newpool]["algorithms"][algo]["port"] = status["config"]["ports"][0]["port"]
+    config["pools"][url]["algorithms"][algo]["port"] = status["config"]["ports"][0]["port"]
 def apiHashrate(miner): #returns hashrate for eth in mh and all others in kh
     if miner=="ccminer":
         return [ccminerapi("summary"), "kh"]

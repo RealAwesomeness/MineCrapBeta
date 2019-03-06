@@ -50,13 +50,13 @@ def createconfig():
 def yiimpalgos(url, config):
     status = json.loads(requests.get(url + "/api/status"))
     for algo in status:
-        config["pools"][newpool]["algorithms"][algo]["port"] = status[algo]["port"]
+        config["pools"][url]["algorithms"][algo]["port"] = status[algo]["port"]
     return config
 def nompalgos(url, config):
     port = input("What port is the api located on?")
     algo = input("What algo is this NOMP pool for?")
     status = json.loads(requests.get(url + ":" + port + "/stats")
-    config["pools"][newpool]["algorithms"][algo]["port"] = status["config"]["ports"][0]["port"]
+    config["pools"][url]["algorithms"][algo]["port"] = status["config"]["ports"][0]["port"]
 def apiHashrate(miner): #returns hashrate for eth in mh and all others in kh
     if miner=="ccminer":
         return [ccminerapi("summary"), "kh"]

@@ -65,15 +65,12 @@ def yiimpalgos(url, config):
 def nompalgos(url, config):
     port = input("What port is the api located on?")
     algo = input("What algo is this NOMP pool for?")
-<<<<<<< HEAD
     try:
         status = urlopen("http://" + url + ":" + port + "/stats")
     except:
         status = urlopen("https://" + url + ":" + port + "/stats")
     status = json.loads(status.read())
-=======
     status = json.loads(requests.get(url + ":" + port + "/stats")
->>>>>>> f795df1245483abc2c1e7bab89c521b676ef57dd
     config["pools"][url]["algorithms"][algo]["port"] = status["config"]["ports"][0]["port"]
 def apiHashrate(miner): #returns hashrate for eth in mh and all others in kh
     if miner=="ccminer":

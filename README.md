@@ -8,13 +8,11 @@ System Requirements
 - For NVIDIA GPUS : CUDA 8 or higher
 - For AMD GPUS : Adrealanin drivers v18.9.3 or higher
 - Windows 7 or higher **OR** Ubuntu 14.04 or higher
-<<<<<<< HEAD
 - Pipenv
 - Python 3.7 or higher
 - Pip
 =======
 - Make, pipenv, and Python 3.7 or higher
->>>>>>> f795df1245483abc2c1e7bab89c521b676ef57dd
 
 Installation Instructions
 
@@ -24,14 +22,12 @@ Installation Instructions
 
 Usage
 
-<<<<<<< HEAD
 - Run pipenv install
 - Create a pipenv shell with pipenv shell
 - Run MineCrapBeta.py with python MineCrapBeta.py and --create-config if it is your first run
 =======
 - Enter make setup into a terminal or commandline to install dependencies
-- Run MineCrapBeta.py
->>>>>>> f795df1245483abc2c1e7bab89c521b676ef57dd
+- Run MineCrapBeta.py with --config if you need to create a config
 - Enter information when prompted and wait for benchmarking to finish
 
 Troubleshooting

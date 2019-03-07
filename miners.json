@@ -18,16 +18,16 @@
    },
    "miners":{  
       "ethminer":{  
-         "start":" -G --api-bind 6969 --pool stratum://ADDRESS.MINECRAP@SUBDOMAINPOOL:PORT",
+         "start":" -G --api-bind 6969 --pool stratum://ADDRESS.MINECRAP@POOL:PORT",
 		 "api" : true
       },
       "lolminer":{  
-         "start":" --coin zel --pool SUBDOMAINPOOL --port PORT --user ADDRESS --pass x",
+         "start":" --coin zel --pool POOL --port PORT --user ADDRESS --pass x",
 		 "api" : false,
 		 "best" : ["144_5"]
       },
       "ccminer":{  
-         "start":" -a ALGO -b 0.0.0.0:6969 –o SUBDOMAINPOOL:PORT –u ADDRESS -p x",
+         "start":" -a ALGO -b 0.0.0.0:6969 –o POOL:PORT –u ADDRESS -p x",
 		 "api" : true
       }
    }

@@ -5,29 +5,26 @@ import requests
 import socket
 from urllib.request import urlopen
 def startminer(miner, start, algo, config, address):
-    os.path.dirname(os.path.abspath(__file__))
+    thewae = os.path.dirname(os.path.abspath(__file__))
     start = start.replace("ALGO", algo)
     start = start.replace("ADDRESS", address)
     found = False
-    for pool in config.pools:
-        temppath = config.pools[pool]
-        if algo in temppath.algorithms and not Found: #uses first pool with selected algorithm supported
-            if temppath.algorithms[algo].subdomain:
-                print(temppath.url)
-                start = start.replace("POOL", temppath.url)
-                start = start.replace("SUBDOMAIN", temppath.algorithms[algo].subdomain + ".")
-                start = start.replace("PORT", temppath.algorithms[algo].port)
-                found = True
-            else:
-                start = start.replace("POOL", temppath.url)
-                start = start.replace("SUBDOMAIN", "")
-                start = start.replace("PORT", temppath.algorithms[algo].port)
-                found = True
-    if sys.platform.startswith("win"):
-        start = miner + "\\" + miner + ".exe" + start
+    for pool in config["pools"]:
+        if algo in config["pools"][pool]["algorithms"] and not found: #uses first pool with selected algorithm supported
+            print("im here")
+            print(config["pools"][pool])
+            start = start.replace("POOL", config["pools"][pool]["url"])
+            start = start.replace("PORT", config["pools"][pool]["algorithms"][algo]["port"])
+            found = True
+    if found: #checks if the miner can actually mine the algorithm
+        if sys.platform.startswith("win"):
+            start = thewae + "\\" miner + "\\" + miner + ".exe" + start
+        else:
+            start = "./" + miner + "/" + miner + start
+        os.system(start)
+        return True
     else:
-        start = "./" + miner + "/" + miner + start
-    os.system(start)
+        return False
 def createconfig():
     configfile = open("config.json", "w+")
     configexample = open("config_example.json", "r")
@@ -35,22 +32,26 @@ def createconfig():
     for address in config["addresses"]:
          config["addresses"][address] = input("What is your " + str(address) + " address? ")
     getOut = False
-    while not getOut:
+    config["pools"] = {}
+    newpool = "ipsum lorem"
+    while newpool:
         newpool = str(input("Enter a pool URL - including the subdomain but without http/https - leave this empty to exit : "))
-        config.pools[newpool].url = newpool
+        config["pools"][newpool] = {}
+        config["pools"][newpool]["url"] = newpool
         algo = "ipsum lorem"
         type = input("What kind of pool is this (i.e. yiimp, NOMP)? If you don't know leave this empty.")
         if type.lower() == "yiimp":
             config = yiimpalgos(newpool, config)
-        if type.lower() == "nomp":
+        elif type.lower() == "nomp":
             config = nompalgos(newpool, config)
-        while not algo:
-            algo = input("Enter an algo this pool supports. If there aren't anymore just press enter : ")
-            port = input("Enter the port for this algo : ")
-            if not algo:
-                config.pools[newpool].algorithms[algo].port = port
-        if not newpool:
-            getOut = True
+        else:
+            config["pools"][newpool]["algorithms"] = {}
+            while algo:
+                algo = input("Enter an algo this pool supports. If there aren't anymore just press enter : ")
+                port = input("Enter the port for this algo : ")
+                if algo:
+                    config["pools"][newpool]["algorithms"][algo] = {}
+                    config["pools"][newpool]["algorithms"][algo]["port"] = port
     configfile.write(json.dumps(config))
 def yiimpalgos(url, config):
     try:
@@ -58,8 +59,10 @@ def yiimpalgos(url, config):
     except:
         status = urlopen("https://" + url + "/api/status")
     status = json.loads(status.read())
+    config["pools"][url]["algorithms"] = {}
     for algo in status:
-        config.pools[url].algorithms[algo].port = status[algo].port
+        config["pools"][url]["algorithms"][algo] = {}
+        config["pools"][url]["algorithms"][algo]["port"] = status[algo]["port"]
     return config
 def nompalgos(url, config):
     port = input("What port is the api located on?")
@@ -70,7 +73,10 @@ def nompalgos(url, config):
         status = urlopen("https://" + url + ":" + port + "/stats")
     status = json.loads(status.read())
     status = json.loads(requests.get(url + ":" + port + "/stats"))
-    config.pools[url].algorithms[algo].port = status.config.ports[0].port
+    config["pools"][url]["algorithms"] = {}
+    config["pools"][url]["algorithms"][algo] = {}
+    config["pools"][url]["algorithms"][algo]["port"] = status["config"]["ports"][0]["port"]
+    return config
 def apiHashrate(miner): #returns hashrate for eth in mh and all others in kh
     if miner=="ccminer":
         return [ccminerapi("summary"), "kh"]

@@ -16,6 +16,7 @@ def benchmark(algo):
     appdatafile = open("appdata.json", "w")
     config = json.loads(configfile.read())
     miners = json.loads(minersfile.read())
+    appdata["benchmark-data"] = {}
     for algo in miners["supported-algos"]:
         best = ["", 0]
         for miner in miners["supported-algos"][algo]:
@@ -25,18 +26,17 @@ def benchmark(algo):
                     address = config["addresses"]["ethereum"]
                 else:
                     address = config["addresses"]["ethereum"]
-                utils.startminer(miner, miners["miners"][miner]["start"], algo, config, address)
-                time.sleep(300)
-                hashrate = utils.apiHashrate(miner)[0]
-                if hashrate > best[1]:
-                    best[1] = hashrate
-                    best[0] = miner
-                if sys.platform.startswith("win"):
-                    os.system("Taskkill /IM " + miner + ".exe /F")
-                else:
-                    os.system("pkill " + miner)
-            else:
-                if algo in miners["miners"][miner]["best"]:
-                    best = [miner, 99999999]
+                if utils.startminer(miner, miners["miners"][miner]["start"], algo, config, address): #prevents the miner from being stupid and waiting for a miner that doesnt support an algo to average out its hashrate
+                    time.sleep(300)
+                    hashrate = utils.apiHashrate(miner)[0]
+                    if hashrate > best[1]:
+                        best[1] = hashrate
+                        best[0] = miner
+                    if sys.platform.startswith("win"):
+                        os.system("Taskkill /IM " + miner + ".exe /F")
+                    else:
+                        os.system("pkill " + miner)
+            elif algo in miners["miners"][miner]["best"]:
+                 best = [miner, 99999999]
         appdata["benchmark-data"][algo] = best
     appdatafile.write(json.dumps(appdata))

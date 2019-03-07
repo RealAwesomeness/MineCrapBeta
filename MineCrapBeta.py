@@ -27,12 +27,9 @@ def main():
         appdata = {}
         print("Benchmarking algos...")
         for algo in miners["supported-algos"]:
-            result = benchmark.benchmark(algo) #benchmark an algo if it is supported
-            appdata.benchmark-data.hashrate[algo] = result.hashrate
-            appdata.benchmark-data.power[algo] = result.power
-        appdatafilewrite.write(json.dumps(appdata))
-    else:
-        appdata = json.loads(appdata)
+            benchmark.benchmark(algo) #benchmark an algo if it is supported
+    appdatafileread = open("appdata.json", "r")
+    appdata = json.loads(appdatafileread.read())
     supportedalgos = []
     for algo in miners["supported-algos"]:
         supportedalgos.append(algo)
@@ -60,7 +57,7 @@ def main():
             s = subprocess.check_output('tasklist', shell=True)
             if appdata.benchmark-data[best].miner not in s:
                 print("Miner crashed! Restarting...")
-                utils.startminer(miner, miners.miners.[miner].start, bestalgo, config)
+                utils.startminer(miner, miners.miners[miner].start, bestalgo, config)
             else:
                 hashrate = utils.apiHashrate(miner)
                 print("Mining " + bestalgo + " at " + str(hashrate[0]) + hashrate[1] + "/s")
@@ -69,9 +66,9 @@ def main():
         utils.startminer(miner, miners[miner].start, bestalgo, config) #passes the miner, start line syntax, the algo to use (will be able to use coin soon™), and the config
         while True:
             tmp = os.popen("ps -Af").read()
-            if appdata.benchmarkdata.[best].miner not in tmp:
+            if appdata.benchmarkdata[best].miner not in tmp:
                 print("Miner crashed! Restarting...")
-                utils.startminer(miner, miners.miners.[miner].start, bestalgo, config)
+                utils.startminer(miner, miners.miners[miner].start, bestalgo, config)
             else:
                 hashrate = utils.apiHashrate(miner)
                 print("Mining " + bestalgo + " at " + str(hashrate[0]) + hashrate[1] + "/s")

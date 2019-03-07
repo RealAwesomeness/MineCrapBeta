@@ -4,21 +4,28 @@ import time
 import os
 import sys
 def benchmark(algo):
-    minersfile = open("miners.txt", "r")
+    minersfile = open("miners.json", "r")
     configfile = open("config_example.json", "r")
     appdatafile = open("appdata.json", "r+")
-    appdata = json.loads(appdatafile.read())
+    appdata = appdatafile.read()
     if not appdata:
         appdata = {}
+    else:
+        appdata = json.loads(appdata)
     appdatafile.close()
     appdatafile = open("appdata.json", "w")
-    config = json.load(configfile.read())
-    miners = json.load(minersfile.read())
+    config = json.loads(configfile.read())
+    miners = json.loads(minersfile.read())
     for algo in miners["supported-algos"]:
         best = ["", 0]
         for miner in miners["supported-algos"][algo]:
             if miners["miners"][miner]["api"]:
-                utils.startminer(miner, miners["miners"][miner]["start"], algo, config)
+                #What you see below this is really stupid. I'll fix this in future updates but for now it's here so ethereum mining will work right.
+                if miner == "ethminer":
+                    address = config["addresses"]["ethereum"]
+                else:
+                    address = config["addresses"]["ethereum"]
+                utils.startminer(miner, miners["miners"][miner]["start"], algo, config, address)
                 time.sleep(300)
                 hashrate = utils.apiHashrate(miner)[0]
                 if hashrate > best[1]:

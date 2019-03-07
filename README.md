@@ -11,23 +11,19 @@ System Requirements
 - Pipenv
 - Python 3.7 or higher
 - Pip
-=======
-- Make, pipenv, and Python 3.7 or higher
+- Make
 
 Installation Instructions
 
 - If you haven&#39;t already, install drivers and/or CUDA for your GPUS
 - Download the latest release [here](http://github.com/RealAwesomeness/MineCrapBeta/releases)
-- Extract and run MineCrapBeta.py
+- Extract the binaries
+- Let everything through your firewall!
 
 Usage
 
-- Run pipenv install
-- Create a pipenv shell with pipenv shell
-- Run MineCrapBeta.py with python MineCrapBeta.py and --create-config if it is your first run
-=======
 - Enter make setup into a terminal or commandline to install dependencies
-- Run MineCrapBeta.py with --config if you need to create a config
+- Run MineCrapBeta.py with --create-config if you need to create a config
 - Enter information when prompted and wait for benchmarking to finish
 
 Troubleshooting

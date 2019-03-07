@@ -5,25 +5,26 @@ import requests
 import socket
 from urllib.request import urlopen
 def startminer(miner, start, algo, config, address):
+    os.path.dirname(os.path.abspath(__file__))
     start = start.replace("ALGO", algo)
     start = start.replace("ADDRESS", address)
-    start = start.replace("WORKER", config["workername"])
     found = False
-    for pool in config["pools"]:
-        temppath = config["pools"][pool]
-        if algo in temppath["algorithms"] and not Found: #uses first pool with selected algorithm supported
-            if temppath["algorithms"][algo]["subdomain"]:
-                start = start.replace("POOL", temppath["url"])
-                start = start.replace("SUBDOMAIN", temppath["algorithms"][algo]["subdomain"] + ".")
-                start = start.replace("PORT", temppath["algorithms"][algo]["port"])
+    for pool in config.pools:
+        temppath = config.pools[pool]
+        if algo in temppath.algorithms and not Found: #uses first pool with selected algorithm supported
+            if temppath.algorithms[algo].subdomain:
+                print(temppath.url)
+                start = start.replace("POOL", temppath.url)
+                start = start.replace("SUBDOMAIN", temppath.algorithms[algo].subdomain + ".")
+                start = start.replace("PORT", temppath.algorithms[algo].port)
                 found = True
             else:
-                start = start.replace("POOL", temppath["url"])
+                start = start.replace("POOL", temppath.url)
                 start = start.replace("SUBDOMAIN", "")
-                start = start.replace("PORT", temppath[algo]["port"])
+                start = start.replace("PORT", temppath.algorithms[algo].port)
                 found = True
     if sys.platform.startswith("win"):
-        start = miner + ".exe\\" + miner + ".exe" + start
+        start = miner + "\\" + miner + ".exe" + start
     else:
         start = "./" + miner + "/" + miner + start
     os.system(start)
@@ -35,9 +36,8 @@ def createconfig():
          config["addresses"][address] = input("What is your " + str(address) + " address? ")
     getOut = False
     while not getOut:
-        newpool = input("Enter a pool URL - including the subdomain but without http/https - leave this empty to exit : ")
-        config["pools"][newpool]
-        config["pools"][newpool]["url"] = newpool
+        newpool = str(input("Enter a pool URL - including the subdomain but without http/https - leave this empty to exit : "))
+        config.pools[newpool].url = newpool
         algo = "ipsum lorem"
         type = input("What kind of pool is this (i.e. yiimp, NOMP)? If you don't know leave this empty.")
         if type.lower() == "yiimp":
@@ -48,7 +48,7 @@ def createconfig():
             algo = input("Enter an algo this pool supports. If there aren't anymore just press enter : ")
             port = input("Enter the port for this algo : ")
             if not algo:
-                config["pools"][newpool]["algorithms"][algo]["port"] = port
+                config.pools[newpool].algorithms[algo].port = port
         if not newpool:
             getOut = True
     configfile.write(json.dumps(config))
@@ -57,10 +57,9 @@ def yiimpalgos(url, config):
         status = urlopen("http://" + url + "/api/status")
     except:
         status = urlopen("https://" + url + "/api/status")
-    print(status)
     status = json.loads(status.read())
     for algo in status:
-        config["pools"][url]["algorithms"][algo]["port"] = status[algo]["port"]
+        config.pools[url].algorithms[algo].port = status[algo].port
     return config
 def nompalgos(url, config):
     port = input("What port is the api located on?")
@@ -70,8 +69,8 @@ def nompalgos(url, config):
     except:
         status = urlopen("https://" + url + ":" + port + "/stats")
     status = json.loads(status.read())
-    status = json.loads(requests.get(url + ":" + port + "/stats")
-    config["pools"][url]["algorithms"][algo]["port"] = status["config"]["ports"][0]["port"]
+    status = json.loads(requests.get(url + ":" + port + "/stats"))
+    config.pools[url].algorithms[algo].port = status.config.ports[0].port
 def apiHashrate(miner): #returns hashrate for eth in mh and all others in kh
     if miner=="ccminer":
         return [ccminerapi("summary"), "kh"]

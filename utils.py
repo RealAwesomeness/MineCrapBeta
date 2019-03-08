@@ -5,18 +5,16 @@ import requests
 import socket
 from urllib.request import urlopen
 def startminer(miner, start, algo, config, address):
-    thewae = os.path.dirname(os.path.abspath(__file__))
+    thewae = str(os.path.dirname(os.path.abspath(__file__)))
     start = start.replace("ALGO", algo)
     start = start.replace("ADDRESS", address)
     found = False
     for pool in config["pools"]:
         if algo in config["pools"][pool]["algorithms"] and not found: #uses first pool with selected algorithm supported
-            print("im here")
-            print(config["pools"][pool])
             start = start.replace("POOL", config["pools"][pool]["url"])
             start = start.replace("PORT", config["pools"][pool]["algorithms"][algo]["port"])
             found = True
-    if found: #checks if the miner can actually mine the algorithm
+    if found:
         if sys.platform.startswith("win"):
             start = thewae + "\\" miner + "\\" + miner + ".exe" + start
         else:

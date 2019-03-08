@@ -9,6 +9,7 @@ def startminer(miner, start, algo, config, address):
     start = start.replace("ALGO", algo)
     start = start.replace("ADDRESS", address)
     found = False
+    print(config)
     for pool in config["pools"]:
         if algo in config["pools"][pool]["algorithms"] and not found: #uses first pool with selected algorithm supported
             start = start.replace("POOL", config["pools"][pool]["url"])
@@ -16,7 +17,7 @@ def startminer(miner, start, algo, config, address):
             found = True
     if found:
         if sys.platform.startswith("win"):
-            start = thewae + "\\" miner + "\\" + miner + ".exe" + start
+            start = thewae + "\\" + miner + "\\" + miner + ".exe" + start
         else:
             start = "./" + miner + "/" + miner + start
         os.system(start)
@@ -77,7 +78,11 @@ def nompalgos(url, config):
     return config
 def apiHashrate(miner): #returns hashrate for eth in mh and all others in kh
     if miner=="ccminer":
-        return [ccminerapi("summary"), "kh"]
+        hashrate = [ccminerapi("summary"), "kh"]
+        if not hashrate:
+            raise Exception("ccminer api call failed!")
+        else:
+            return hashrate
     if miner=="ethminer":
         return [int(json.loads(requests.get("127.0.0.1:6969", data = {
   "id": 1,
@@ -108,6 +113,6 @@ def ccminerapi(command):
     except Exception as err:
         api_json = {}
         if command == 'summary':
-            api_json['KHS'] = 'crashed'
+            api_json = False
         
     return api_json

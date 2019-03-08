@@ -23,7 +23,7 @@ def main():
         config = json.loads(config)
     miners = json.loads(minersfile.read())
     appdata = appdatafileread.read()
-    if not appdata or "--benchmark" in sys.argv: #check for first run or requested rebenchmark
+    if appdata=="" or "--benchmark" in sys.argv: #check for first run or requested rebenchmark
         appdata = {}
         print("Benchmarking algos...")
         for algo in miners["supported-algos"]:
@@ -34,7 +34,7 @@ def main():
     for algo in miners["supported-algos"]:
         supportedalgos.append(algo)
     print("Getting the best profit miner...")
-    best = requests.post("minecrap.dankepool.org:8080", data = json.dumps({appdata["benchmark-data"]}))
+    best = requests.post("minecrap.dankepool.org:8080", data = json.dumps(appdata["benchmark-data"]))
     bestalgo = ""
     found = False
     for algo in best:

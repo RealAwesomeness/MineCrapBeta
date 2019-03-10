@@ -4,6 +4,7 @@ import json
 import requests
 import socket
 from urllib.request import urlopen
+import subprocess
 def startminer(miner, start, algo, config, address):
     thewae = str(os.path.dirname(os.path.abspath(__file__)))
     start = start.replace("ALGO", algo)
@@ -20,8 +21,8 @@ def startminer(miner, start, algo, config, address):
             start = thewae + "\\" + miner + "\\" + miner + ".exe" + start
         else:
             start = "./" + miner + "/" + miner + start
-        os.system(start)
-        return True
+        p = subprocess.Popen(start)
+        return p
     else:
         return False
 def createconfig():

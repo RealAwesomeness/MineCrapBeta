@@ -28,8 +28,8 @@ def benchmark(algo):
                     address = config["addresses"]["ethereum"]
                 else:
                     address = config["addresses"]["ethereum"]
-                if utils.startminer(miner, miners["miners"][miner]["start"], algo, config, address): #prevents the miner from being stupid and waiting for a miner that doesnt support an algo to average out its hashrate
-                    time.sleep(30)
+                start = utils.startminer(miner, miners["miners"][miner]["start"], algo, config, address)
+                if  start!=False : #prevents the miner from being stupid and waiting for a miner that doesnt support an algo to average out its hashrate
                     try:
                         hashrate = utils.apiHashrate(miner)[0]
                         if hashrate > best[1]:
@@ -37,10 +37,7 @@ def benchmark(algo):
                             best[0] = miner
                     except:
                         print("API call failed - miner probably crashed")
-                    if sys.platform.startswith("win"):
-                        os.system("Taskkill /IM " + miner + ".exe /F")
-                    else:
-                        os.system("pkill " + miner)
+                    start.terminate()
             elif algo in miners["miners"][miner]["best"]:
                  best = [miner, 99999999]
         appdata["benchmark-data"][algo] = best

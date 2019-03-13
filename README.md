@@ -1,5 +1,6 @@
 # MineCrapBeta
 [![Build Status](https://travis-ci.org/RealAwesomeness/MineCrapBeta.svg?branch=master)](https://travis-ci.org/RealAwesomeness/MineCrapBeta)
+
 Multi OS profit switching mining - **CURRENTLY ONLY SUPPORTING AUTOEXCHANGE POOLS**
 
 MineCrap Manual

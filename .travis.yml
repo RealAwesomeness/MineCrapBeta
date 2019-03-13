@@ -1,6 +1,5 @@
 language: python
 python:
-  - "3.5"
   - "3.6"
   - "3.7"
 env:
@@ -9,5 +8,3 @@ env:
     - PIPENV_IGNORE_VIRTUALENVS=1
 # command to install dependencies
 install: make setup
-# # command to run tests
-script: make test

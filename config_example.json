@@ -5,13 +5,26 @@
    },
    "pools":{  
       "dankepool.org":{  
+         "url":"dankepool.org",
          "algorithms":{  
             "x16r":{  
-               "port":"3636",
-               "subdomain":""
+               "port":3636
             }
-         },
-         "url":"dankepool.org"
+         }
+      },
+      "us-eth.2miners.com":{  
+         "url":"us-eth.2miners.com",
+         "algorithms":{  
+            "ethash":{  
+               "port":"2020"
+            }
+         }
+      },
+      "":{  
+         "url":"",
+         "algorithms":{  
+
+         }
       }
    }
 }

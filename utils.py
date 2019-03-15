@@ -14,7 +14,7 @@ def startminer(miner, start, algo, config, address):
     for pool in config["pools"]:
         if algo in config["pools"][pool]["algorithms"] and not found: #uses first pool with selected algorithm supported
             start = start.replace("POOL", config["pools"][pool]["url"])
-            start = start.replace("PORT", config["pools"][pool]["algorithms"][algo]["port"])
+            start = start.replace("PORT", str(config["pools"][pool]["algorithms"][algo]["port"]))
             found = True
     if found:
         if sys.platform.startswith("win"):

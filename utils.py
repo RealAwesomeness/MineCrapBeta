@@ -21,7 +21,7 @@ def startminer(miner, start, algo, config, address):
             start = thewae + "\\" + miner + "\\" + miner + ".exe" + start
         else:
             start = "./" + miner + "/" + miner + start
-        p = subprocess.Popen(start)
+        p = subprocess.Popen(start, shell=True)
         return p
     else:
         return False

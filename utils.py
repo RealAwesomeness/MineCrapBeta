@@ -10,7 +10,6 @@ def startminer(miner, start, algo, config, address):
     start = start.replace("ALGO", algo)
     start = start.replace("ADDRESS", address)
     found = False
-    print(config)
     for pool in config["pools"]:
         if algo in config["pools"][pool]["algorithms"] and not found: #uses first pool with selected algorithm supported
             start = start.replace("POOL", config["pools"][pool]["url"])

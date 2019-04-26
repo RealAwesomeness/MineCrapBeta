@@ -56,7 +56,6 @@ def main():
     minersfile.close()
     configfile.close()
     miner = appdata.benchmark-data[bestalgo][0]
-    #What you see below this is really stupid. I'll fix this in future updates but for now it's here so ethereum mining will work right.
     if sys.platform.startswith("win"):
         utils.startminer(miner, miners.miners[miner].start, bestalgo, config)
         while True:

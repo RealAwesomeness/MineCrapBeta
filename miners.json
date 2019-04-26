@@ -12,7 +12,7 @@
 	 "sgminer-phi2"
       ],
       "ethash":[
-	 "sgminer"
+	 "sgminer-phi2"
       ]
    },
    "miners":{  

@@ -23,11 +23,6 @@ def benchmark(algo):
             print(miner)
             if miners["miners"][miner]["api"]:
                 print(miners["supported-algos"][algo])
-                #What you see below this is really stupid. I'll fix this in future updates but for now it's here so ethereum mining will work right.
-                if miner == "ethminer":
-                    address = config["addresses"]["ethereum"]
-                else:
-                    address = config["addresses"]["ethereum"]
                 start = utils.startminer(miner, miners["miners"][miner]["start"], algo, config, address)
                 if start!=False : #prevents the miner from being stupid and waiting for a miner that doesnt support an algo to average out its hashrate
                     time.sleep(30)

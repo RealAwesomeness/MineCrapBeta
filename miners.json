@@ -10,6 +10,9 @@
       "lyra2re3":[  
          "ccminer",
 	 "sgminer-phi2"
+      ],
+      "ethash":[
+	 "sgminer"
       ]
    },
    "miners":{  

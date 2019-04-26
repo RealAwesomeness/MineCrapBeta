@@ -83,9 +83,11 @@ def apiHashrate(miner): #returns hashrate for eth in mh and all others in kh
             raise Exception("ccminer api call failed!")
         else:
             return hashrate
-    if miner=="ethminer":
-        print(requests.get("http://127.0.0.1:6969", data = json.dumps({"id": 1,"jsonrpc": "2.0","method": "miner_getstat1"}).replace("\n","")))
-        return [int(json.loads(requests.get("http://127.0.0.1:6969", data = json.dumps({"id": 1,"jsonrpc": "2.0","method": "miner_getstat1"}).replace("\n","")))["result"][2].split(";")[0])/10, "mh"]
+    elif "sgminer" in miner:
+        hashrate= [sgminerapi(
+    #if miner=="ethminer":
+    #    print(requests.get("http://127.0.0.1:6969", data = json.dumps({"id": 1,"jsonrpc": "2.0","method": "miner_getstat1"}).replace("\n","")))
+    #    return [int(json.loads(requests.get("http://127.0.0.1:6969", data = json.dumps({"id": 1,"jsonrpc": "2.0","method": "miner_getstat1"}).replace("\n","")))["result"][2].split(";")[0])/10, "mh"]
 def ccminerapi(command):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_address = ("127.0.0.1", 6969)

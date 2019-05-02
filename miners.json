@@ -2,17 +2,17 @@
    "supported-algos":{  
       "x22i":[  
          "ccminer",
-	 "sgminer-phi2"
+         "sgminer-phi2"
       ],
       "x16r":[  
          "ccminer"
       ],
       "lyra2re3":[  
          "ccminer",
-	 "sgminer-phi2"
+         "sgminer-phi2"
       ],
       "ethash":[
-	 "sgminer-phi2"
+         "sgminer-phi2"
       ]
    },
    "miners":{  

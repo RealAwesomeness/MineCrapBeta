@@ -23,7 +23,7 @@ def benchmark(algo):
             print(miner)
             if miners["miners"][miner]["api"]:
                 print(miners["supported-algos"][algo])
-                start = utils.startminer(miner, miners["miners"][miner]["start"], algo, config, address)
+                start = utils.startminer(miner, miners["miners"][miner]["start"], algo, config)
                 if start!=False : #prevents the miner from being stupid and waiting for a miner that doesnt support an algo to average out its hashrate
                     time.sleep(30)
                     hashrate = utils.apiHashrate(miner)[0]

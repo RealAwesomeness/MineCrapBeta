@@ -5,8 +5,9 @@ import requests
 import socket
 from urllib.request import urlopen
 import subprocess
-def startminer(miner, start, algo, config, address):
+def startminer(miner, start, algo, config):
     thewae = str(os.path.dirname(os.path.abspath(__file__)))
+    address = config.addresses.bitcoin
     start = start.replace("ALGO", algo)
     start = start.replace("ADDRESS", address)
     found = False
@@ -77,23 +78,21 @@ def nompalgos(url, config):
     config["pools"][url]["algorithms"][algo]["port"] = status["config"]["ports"][0]["port"]
     return config
 def apiHashrate(miner): #returns hashrate for eth in mh and all others in kh
-    if miner=="ccminer":
-        hashrate = [ccminerapi("summary"), "kh"]
+    if miner=="ccminer" or miner=="sgminer":
+        hashrate = [minerapi("summary"), "kh"]
         if not hashrate:
-            raise Exception("ccminer api call failed!")
+            raise Exception(miner + " api call failed!")
         else:
             return hashrate
-    elif "sgminer" in miner:
-        hashrate= [sgminerapi(
     #if miner=="ethminer":
     #    print(requests.get("http://127.0.0.1:6969", data = json.dumps({"id": 1,"jsonrpc": "2.0","method": "miner_getstat1"}).replace("\n","")))
     #    return [int(json.loads(requests.get("http://127.0.0.1:6969", data = json.dumps({"id": 1,"jsonrpc": "2.0","method": "miner_getstat1"}).replace("\n","")))["result"][2].split(";")[0])/10, "mh"]
-def ccminerapi(command):
+def minerapi(command):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_address = ("127.0.0.1", 6969)
     try:
         sock.connect((server_address))
-        print ("Connected to ccminer API")
+        print ("Connected to API")
         sock.sendall(command)
         data = sock.recv(4096)
         data = data.replace('|\x00','')

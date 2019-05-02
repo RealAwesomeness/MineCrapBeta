@@ -5,8 +5,8 @@
       "raven":"RD5u1WLaLkfVM5Pp1frX2hjYqifzS4S2o6"
    },
    "pools":{  
-      "dankepool.org":{  
-         "url":"ravenminer.com",
+      "x16r.mine.zergpool.com":{  
+         "url":"x16r.mine.zergpool.com",
          "algorithms":{  
             "x16r":{  
                "port":3636
@@ -21,10 +21,20 @@
             }
          }
       },
-      "":{  
-         "url":"",
+      "lyra2v3.mine.zergpool.com":{  
+         "url":"lyra2v3.mine.zergpool.com",
          "algorithms":{  
-
+             "lyra2re3":{
+                 "port":"4550"
+              }
+         }
+      },
+      "x22i.mine.zergpool.com":{  
+         "url":"x22i.mine.zergpool.com",
+         "algorithms":{  
+             "x22i":{
+                 "port":"3223"
+              }
          }
       }
    }

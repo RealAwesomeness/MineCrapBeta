@@ -1,7 +1,7 @@
 {  
    "addresses":{  
       "bitcoin":"3DkpM7Fxvfz2dWy1ntHfCDKguCPGKpH2GG",
-      "ethereum":"0x07d66da8d57573419b81d5445094d8f8249f01af"
+      "ethereum":"0x07d66da8d57573419b81d5445094d8f8249f01af",
       "raven":"RD5u1WLaLkfVM5Pp1frX2hjYqifzS4S2o6"
    },
    "pools":{  
@@ -9,7 +9,7 @@
          "url":"x16r.mine.zergpool.com",
          "algorithms":{  
             "x16r":{  
-               "port":3636
+               "port":"3636"
             }
          }
       },

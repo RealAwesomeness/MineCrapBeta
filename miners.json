@@ -20,7 +20,7 @@
          "start":" -a ALGO -b 0.0.0.0:6969 –o POOL:PORT –u ADDRESS -p x",
 		 "api" : true
       },
-      "sgminer":{  
+      "sgminer":{
          "start":" -a ALGO -b 0.0.0.0:6969 –o POOL:PORT –u ADDRESS -p x",
 		 "api" : true
       }

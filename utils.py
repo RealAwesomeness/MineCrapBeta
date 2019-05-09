@@ -7,7 +7,7 @@ from urllib.request import urlopen
 import subprocess
 def startminer(miner, start, algo, config):
     thewae = str(os.path.dirname(os.path.abspath(__file__)))
-    address = config.addresses.bitcoin
+    address = config['addresses']['bitcoin']
     start = start.replace("ALGO", algo)
     start = start.replace("ADDRESS", address)
     found = False
@@ -65,14 +65,13 @@ def yiimpalgos(url, config):
         config["pools"][url]["algorithms"][algo]["port"] = status[algo]["port"]
     return config
 def nompalgos(url, config):
-    port = input("What port is the api located on?")
+    apiurl = input("What is the url of the api?")
     algo = input("What algo is this NOMP pool for?")
     try:
-        status = urlopen("http://" + url + ":" + port + "/stats")
+        status = urlopen("http://" + apiurl + "/stats")
     except:
-        status = urlopen("https://" + url + ":" + port + "/stats")
+        status = urlopen("https://" + apiurl + "/stats")
     status = json.loads(status.read())
-    status = json.loads(requests.get(url + ":" + port + "/stats"))
     config["pools"][url]["algorithms"] = {}
     config["pools"][url]["algorithms"][algo] = {}
     config["pools"][url]["algorithms"][algo]["port"] = status["config"]["ports"][0]["port"]

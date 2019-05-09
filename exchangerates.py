@@ -19,8 +19,8 @@ def getJsonFromTradeOgre():
 		response = None
 	return response
 
-def getJsonFromStocksExchange():
-	url = 'https://app.stocks.exchange/api2/ticker'
+def getJsonFromStex():
+	url = 'https://app.stex.com/api2/ticker'
 	response = None
 	try:
 		with aiohttp.get(url) as result:
@@ -148,8 +148,8 @@ def cb(coin):
 	return (json.dumps(messageResponse))
 	
 	
-def se(coin):
-	"""se(coin) to get info on coin from Stocks.Exchange"""
+def stex(coin):
+	"""stex(coin) to get info on coin from Stex"""
 	exchanges.append(se)
 	jsonResult = getJsonFromStocksExchange()
 	if jsonResult != None:

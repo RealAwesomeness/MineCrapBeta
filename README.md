@@ -27,7 +27,7 @@ MineCrap was created because other profit mining programs were either too expens
 
 ### Usage
 
-- Setup the enviorment by doing `pipenv --python 3.x` where x is your version of python3.
+- Setup the environment by doing `pipenv --python 3.x` where x is your version of python3.
 - Run `pipenv install` to install dependencies.
 - Run MineCrapBeta.py with `python3 MineCrapBeta.py`
 - Enter information when prompted and wait for benchmarking to finish

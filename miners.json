@@ -17,11 +17,11 @@
    },
    "miners":{  
       "ccminer":{  
-         "start":" -a ALGO -b 0.0.0.0:6969 -o POOL:PORT -u ADDRESS -p x",
+         "start":" -a ALGO -b 0.0.0.0:6969 -o POOL:PORT -u ADDRESS -p x",
          "api":true
       },
       "sgminer":{  
-         "start":" -a ALGO -b 0.0.0.0:6969 -o POOL:PORT -u ADDRESS -p x",
+         "start":" -a ALGO -b 0.0.0.0:6969 -o POOL:PORT -u ADDRESS -p x",
          "api":true
       }
    }

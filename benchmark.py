@@ -20,9 +20,7 @@ def benchmark(algo):
     for algo in miners["supported-algos"]:
         best = ["", 0]
         for miner in miners["supported-algos"][algo]:
-            print(miner)
             if miners["miners"][miner]["api"]:
-                print(miners["supported-algos"][algo])
                 start = utils.startminer(miner, miners["miners"][miner]["start"], algo, config)
                 if start!=False : #prevents the miner from being stupid and waiting for a miner that doesnt support an algo to average out its hashrate
                     time.sleep(30)

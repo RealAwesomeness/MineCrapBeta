@@ -25,6 +25,7 @@ def startminer(miner, start, algo, config):
         p = subprocess.Popen(start, shell=True)
         return p
     else:
+        p.terminate()
         return False
 def createconfig():
     configfile = open("config.json", "w+")

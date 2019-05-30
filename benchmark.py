@@ -25,7 +25,6 @@ def benchmark(algo):
                 if start!=False : #prevents the miner from being stupid and waiting for a miner that doesnt support an algo to average out its hashrate
                     time.sleep(30)
                     hashrate = utils.apiHashrate(miner)[0]
-                    print(hashrate)
                     if hashrate > best[1]:
                         best[1] = hashrate
                         best[0] = miner
